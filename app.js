@@ -237,25 +237,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(payload)
                 });
 
-                // Display success feedback to user
-                if (successMessage) {
-                    successMessage.classList.remove('hidden');
-                    form.reset();
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    
-                    setTimeout(() => {
-                        successMessage.classList.add('hidden');
-                    }, 7000);
+                const data = await response.json();
+
+                if (data.success === 'true' || data.success === true) {
+                    if (successMessage) {
+                        successMessage.textContent = 'Thank you for your inquiry! Your information has been sent to our leasing team.';
+                        successMessage.classList.remove('hidden');
+                        form.reset();
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        
+                        setTimeout(() => {
+                            successMessage.classList.add('hidden');
+                        }, 7000);
+                    } else {
+                        alert('Thank you! Your leasing inquiry has been successfully sent.');
+                        form.reset();
+                    }
+                } else if (data.message && data.message.includes('Activation')) {
+                    if (errorMessage) {
+                        errorMessage.innerHTML = '<strong>Form Activation Required:</strong> FormSubmit has sent a 1-click activation email to <strong>' + recipientEmail + '</strong>. Please open that email and click <em>"Activate Form"</em> to enable delivery.';
+                        errorMessage.classList.remove('hidden');
+                        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
                 } else {
-                    alert('Thank you! Your leasing inquiry has been successfully sent.');
-                    form.reset();
+                    if (errorMessage) {
+                        errorMessage.textContent = data.message || 'Form submission encountered an issue. Please call our leasing office directly at (937) 561-2590.';
+                        errorMessage.classList.remove('hidden');
+                        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
                 }
             } catch (error) {
-                // If offline or network block, display success confirmation for user
-                if (successMessage) {
-                    successMessage.classList.remove('hidden');
-                    form.reset();
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                if (errorMessage) {
+                    errorMessage.textContent = 'Unable to send form online. Please call our leasing office directly at (937) 561-2590.';
+                    errorMessage.classList.remove('hidden');
+                    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
             } finally {
                 if (submitBtn) {
