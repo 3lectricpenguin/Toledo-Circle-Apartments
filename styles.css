@@ -343,6 +343,26 @@ ul {
     gap: var(--space-lg);
     margin-left: auto;
   }
+
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-portal-btn {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.85rem;
+    border: 1.5px solid var(--color-terracotta-primary);
+    color: var(--color-terracotta-primary);
+    background-color: transparent;
+  }
+
+  .nav-portal-btn:hover {
+    background-color: var(--color-terracotta-primary);
+    color: var(--color-white);
+  }
 }
 
 .nav-link {
