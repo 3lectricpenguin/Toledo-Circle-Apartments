@@ -1282,6 +1282,22 @@ textarea.form-control {
   gap: 6px;
 }
 
+.footer-credit {
+  color: rgba(250, 248, 245, 0.7);
+}
+
+.credit-link {
+  color: var(--color-terracotta-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition-normal);
+}
+
+.credit-link:hover {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+
 .eho-svg {
   stroke: var(--color-cream-bg);
   vertical-align: middle;
