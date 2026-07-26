@@ -509,7 +509,7 @@ const initPhotoGalleryCarousel = () => {
         { src: 'images/IMG_0132.WEBP', title: 'Clean & Modern Bathroom Vanity', alt: 'Bathroom Vanity Mirror' },
         { src: 'images/IMG_0133.WEBP', title: 'Full Bathroom & Shower Tub', alt: 'Bathroom Tub and Shower' },
         { src: 'images/IMG_0134.WEBP', title: 'Second Bedroom Layout', alt: 'Second Bedroom' },
-        { src: 'images/IMG_0135.WEBP', title: 'Spacious Closet & Storage Space', alt: 'Closet Storage' },
+        { src: 'images/IMG_0135.WEBP', title: 'Spacious Closets & Storage Space', alt: 'Closet Storage' },
         { src: 'images/IMG_0136.WEBP', title: 'Entryway & Main Living Room View', alt: 'Living Room Entryway' },
         { src: 'images/IMG_0137.WEBP', title: 'Fully Equipped Kitchen Prep Area', alt: 'Kitchen Counter Prep Space' },
         { src: 'images/IMG_0138.WEBP', title: 'Dining Area & Hallway Access', alt: 'Dining Area' },
