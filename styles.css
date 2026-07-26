@@ -283,6 +283,21 @@ ul {
   transition: var(--transition-normal);
 }
 
+.logo-text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-subtext {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--color-terracotta-primary);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin-top: 1px;
+}
+
 .logo-link:hover .logo-text {
   color: var(--color-terracotta-primary);
 }
