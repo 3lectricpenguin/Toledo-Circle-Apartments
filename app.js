@@ -479,6 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initImageLightbox();
     initPhotoGalleryCarousel();
+    initFloorPlanViewer();
 });
 
 // ----------------------------------------------------
@@ -497,6 +498,10 @@ const initPhotoGalleryCarousel = () => {
     if (!modal || !triggerBtn || !mainImg || !thumbTrack) return;
 
     const galleryPhotos = [
+        { src: 'images/floorplan-1bed-building-a.jpg', title: '1 Bedroom Floor Plan - Building A (500 Sq Ft)', alt: '1 Bed 1 Bath Building A Floor Plan' },
+        { src: 'images/floorplan-1bed-building-b.jpg', title: '1 Bedroom Floor Plan - Building B (500 Sq Ft)', alt: '1 Bed 1 Bath Building B Floor Plan' },
+        { src: 'images/floorplan-2bed-building-a.jpg', title: '2 Bedroom / 1 Bath Floor Plan - Building A (700 Sq Ft)', alt: '2 Bed 1 Bath Building A Floor Plan' },
+        { src: 'images/floorplan-2bed-building-b.jpg', title: '2 Bedroom / 1.5 Bath Floor Plan - Building B (700 Sq Ft)', alt: '2 Bed 1.5 Bath Building B Floor Plan' },
         { src: 'images/Toledo_Circle_Exterior.png', title: 'Exterior Grounds & Community View', alt: 'Toledo Circle Apartments Exterior Grounds' },
         { src: 'images/Toledo_Circle_Courtyard.WEBP', title: 'Courtyard & Picnic Pavilion', alt: 'Courtyard Lawn & Pavilion' },
         { src: 'images/IMG_0125.WEBP', title: 'Landscaped Walkways & Private Balconies', alt: 'Apartment Building Walkways' },
@@ -615,6 +620,118 @@ const initPhotoGalleryCarousel = () => {
             prevSlide();
         } else if (e.key === 'Escape') {
             closeGallery();
+        }
+    });
+};
+
+// ----------------------------------------------------
+// 9. DEDICATED FLOOR PLAN VIEWER MODAL
+// ----------------------------------------------------
+const initFloorPlanViewer = () => {
+    const modal = document.getElementById('floorplan-modal');
+    if (!modal) return;
+
+    const titleEl = document.getElementById('floorplan-modal-title');
+    const subtitleEl = document.getElementById('floorplan-modal-subtitle');
+    const tabsContainer = document.getElementById('floorplan-modal-tabs');
+    const imgEl = document.getElementById('floorplan-modal-img');
+    const imgWrapper = document.getElementById('floorplan-img-wrapper');
+    const badgeEl = document.getElementById('floorplan-modal-badge');
+
+    const floorPlanData = {
+        '1bed': {
+            title: '1 Bedroom / 1 Bathroom Floor Plans',
+            subtitle: 'Select a building layout option below to view details:',
+            plans: [
+                {
+                    name: 'Building A Layout',
+                    specs: '1 Bed / 1 Bath • 500 Sq Ft',
+                    src: 'images/floorplan-1bed-building-a.jpg',
+                    titleText: '1 Bedroom Floor Plan - Building A (500 Sq Ft)'
+                },
+                {
+                    name: 'Building B Layout',
+                    specs: '1 Bed / 1 Bath • 500 Sq Ft',
+                    src: 'images/floorplan-1bed-building-b.jpg',
+                    titleText: '1 Bedroom Floor Plan - Building B (500 Sq Ft)'
+                }
+            ]
+        },
+        '2bed': {
+            title: '2 Bedroom Floor Plans',
+            subtitle: 'Select a building layout option below to view details:',
+            plans: [
+                {
+                    name: 'Building A Layout (1.0 Bath)',
+                    specs: '2 Bed / 1 Bath • 700 Sq Ft',
+                    src: 'images/floorplan-2bed-building-a.jpg',
+                    titleText: '2 Bedroom / 1 Bath Floor Plan - Building A (700 Sq Ft)'
+                },
+                {
+                    name: 'Building B Layout (1.5 Bath)',
+                    specs: '2 Bed / 1.5 Bath • 700 Sq Ft',
+                    src: 'images/floorplan-2bed-building-b.jpg',
+                    titleText: '2 Bedroom / 1.5 Bath Floor Plan - Building B (700 Sq Ft)'
+                }
+            ]
+        }
+    };
+
+    const openFloorPlan = (type) => {
+        const data = floorPlanData[type];
+        if (!data) return;
+
+        titleEl.textContent = data.title;
+        subtitleEl.textContent = data.subtitle;
+        tabsContainer.innerHTML = '';
+
+        data.plans.forEach((plan, index) => {
+            const tabBtn = document.createElement('button');
+            tabBtn.className = `floorplan-tab-btn ${index === 0 ? 'active' : ''}`;
+            tabBtn.textContent = plan.name;
+            tabBtn.addEventListener('click', () => {
+                tabsContainer.querySelectorAll('.floorplan-tab-btn').forEach(b => b.classList.remove('active'));
+                tabBtn.classList.add('active');
+                loadPlan(plan);
+            });
+            tabsContainer.appendChild(tabBtn);
+        });
+
+        loadPlan(data.plans[0]);
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const loadPlan = (plan) => {
+        imgEl.src = plan.src;
+        imgEl.alt = plan.titleText;
+        imgWrapper.setAttribute('data-lightbox-src', plan.src);
+        imgWrapper.setAttribute('data-lightbox-title', plan.titleText);
+        if (badgeEl) badgeEl.textContent = plan.specs;
+    };
+
+    const closeFloorPlan = () => {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll('[data-floorplan-open]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = btn.getAttribute('data-floorplan-open');
+            openFloorPlan(type);
+        });
+    });
+
+    modal.querySelectorAll('[data-floorplan-close]').forEach(el => {
+        el.addEventListener('click', closeFloorPlan);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeFloorPlan();
         }
     });
 };
