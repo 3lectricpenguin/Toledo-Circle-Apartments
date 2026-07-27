@@ -6,13 +6,15 @@
   "scripts": {
     "start": "node server.js",
     "deploy": "wrangler deploy",
-    "preview": "wrangler dev"
+    "preview": "wrangler dev",
+    "generate-qr": "node scripts/generate_qr.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "heic-convert": "^2.1.0"
+    "heic-convert": "^2.1.0",
+    "qrcode": "^1.5.4"
   }
 }
