@@ -2155,3 +2155,84 @@ textarea.form-control {
   }
 }
 
+/* App Store & Resident Center App Buttons */
+.store-buttons-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-store {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1.25rem;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-white);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: var(--transition-normal);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-store:hover {
+  background-color: var(--color-terracotta-primary);
+  color: var(--color-white);
+  border-color: var(--color-terracotta-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-store-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+
+.btn-store-subtitle {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
+  font-weight: 500;
+}
+
+.btn-store-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.btn-store-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  background-color: var(--color-cream-bg);
+  color: var(--color-forest-dark);
+  border: 1px solid var(--color-cream-border);
+  text-decoration: none;
+  transition: var(--transition-normal);
+  flex: 1;
+  justify-content: center;
+  min-width: 110px;
+}
+
+.btn-store-compact:hover {
+  background-color: var(--color-forest-dark);
+  color: var(--color-white);
+  border-color: var(--color-forest-dark);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .app-feature-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
